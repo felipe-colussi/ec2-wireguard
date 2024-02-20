@@ -1,7 +1,7 @@
 .idea
 .terraform
 
-variables.tf
+terraform.tfvars
 vpn.conf
 terraform.*
 .terraform.*
