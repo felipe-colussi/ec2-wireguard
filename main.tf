@@ -48,7 +48,7 @@ resource "aws_instance" "single-user-vpn" {
 
 
 // We sleep cause of a delay on AWS from creation to ssh being ready and the script.sh to execute
-resource "time_sleep" "wait_45_seconds" {
+resource "time_sleep" "wait_script_to_be_done" {
   depends_on = [aws_instance.single-user-vpn]
 
   create_duration = "100s"
@@ -60,6 +60,6 @@ resource "null_resource" "scp" {
     interpreter = [var.bash_interpreter, "-c"]
     command = "scp -i ${var.ssh_pem_path}   -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@${aws_instance.single-user-vpn[0].public_dns}:/home/ubuntu/client1.conf ${var.vpn_config_path}; sleep 5"
   }
-  depends_on = [time_sleep.wait_45_seconds]
+  depends_on = [time_sleep.wait_script_to_be_done]
 }
 
