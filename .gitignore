@@ -1,0 +1,7 @@
+.idea
+.terraform
+
+variables.tf
+vpn.conf
+terraform.*
+.terraform.*
